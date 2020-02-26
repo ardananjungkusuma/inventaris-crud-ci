@@ -8,31 +8,22 @@
                 <div class="card-body">
                     <h5 class="card-title"></h5>
                     <p class="card-text">
-                        <label for=""><b>Nama User :</b></label>
+                        <label for=""><b>Nama Mahasiswa</b></label>
                         <?php echo $transaksi->nama; ?>
                     </p>
                     <p class="card-text">
-                        <label for=""><b>Barang yang Dipinjam :</b></label>
+                        <label for=""><b>Nomor Induk Mahasiswa :</b></label>
                         <?= $transaksi->nama_barang; ?>
                     </p>
                     <p class="card-text">
-                        <label for=""><b>Tanggal Pinjam :</b></label>
+                        <label for=""><b>Nomer HP :</b></label>
                         <?= $transaksi->tanggal_pinjam; ?>
                     </p>
                     <p class="card-text">
-                        <label for=""><b>Tanggal Kembali :</b></label>
+                        <label for=""><b>Alamat : :</b></label>
                         <?= $transaksi->tanggal_kembali; ?>
                     </p>
-                    <p class="card-text">
-                        <label for=""><b>Tanggal Dikembalikan :</b></label>
-                        <?= $transaksi->tanggal_dikembalikan; ?>
-                    </p>
-                    <p class="card-text">
-                        <label for=""><b>Status Peminjaman:</b></label>
-                        <?= $transaksi->status; ?>
-                    </p>
-
-                    <a href="<?= base_url(); ?>transaksi" class="btn btn-primary">Kembali</a>
+                    <a href="<?= base_url('mahasiswa'); ?>" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
         </div>

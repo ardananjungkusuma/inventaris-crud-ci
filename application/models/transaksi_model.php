@@ -14,51 +14,50 @@ class transaksi_model extends CI_Model
         return $query->result_array();
     }
 
-    public function tambahdatatransaksi()
+    public function getAllTransaksiUserKategoriById($id)
     {
-        $tanggal_pinjam = date('d:m:y');
-        $tanggal_kembali = date('d:m:y', strtotime("+1 days"));
+        $query = $this->db->query("select * from transaksi_inventaris t join mahasiswa m on m.id_mahasiswa = t.id_mahasiswa join barang b on b.id_barang = t.id_barang where t.id_transaksi = $id");
+        return $query->row();
+    }
 
+    public function tambahDataTransaksi()
+    {
+        $tanggal_pinjam = date('yy-m-d');
+        $tanggal_kembali = date('yy-m-d', strtotime("+1 days"));
         $data = [
-            "id_mahasiswa" => $this->input->post('id_user', true), // ini sama dengan htmlspecialchars($_POST['nama'])
-            "id_barang" => $this->input->post('id_kategori', true),
+            "id_mahasiswa" => $this->input->post('id_mahasiswa', true), // ini sama dengan htmlspecialchars($_POST['nama'])
+            "id_barang" => $this->input->post('id_barang', true),
             "tanggal_pinjam" => $tanggal_pinjam,
             "tanggal_kembali" => $tanggal_kembali,
             "tanggal_dikembalikan" => 'None',
             "status" => 'Belum Dikembalikan'
         ];
+        $id_barangnya = $this->input->post('id_barang', true);
+        $queryGetJumlah = $this->db->query("select * from barang where id_barang = $id_barangnya");
+        foreach ($queryGetJumlah->result() as $row) {
+            $kurangBarang = $row->jumlah_barang - 1;
+        }
+        $this->db->query("UPDATE barang SET jumlah_barang = $kurangBarang WHERE id_barang = $id_barangnya");
         $this->db->insert('transaksi_inventaris', $data);
     }
 
-    public function hapusdatamhs($id)
-    {
-        $this->db->where('id_transaksi', $id);
-        $this->db->delete('transaksi');
-    }
-
-    public function gettransaksibyid($id)
-    {
-        return $this->db->get_where('transaksi', ['id_transaksi' => $id])->row_array();
-    }
-
-    public function ubahdatatransaksi()
+    public function ubahDataTransaksi()
     {
         $data = [
-            "id_user" => $this->input->post('id_user', true), // ini sama dengan htmlspecialchars($_POST['nama'])
-            "id_kategori" => $this->input->post('id_kategori', true),
-            "jumlah_nominal" => $this->input->post('jumlah_nominal', true)
+            "tanggal_dikembalikan" => $this->input->post('tanggal_dikembalikan', true),
+            "status" => $this->input->post('status', true)
         ];
 
         $this->db->where('id_transaksi', $this->input->post('id_transaksi'));
-        $this->db->update('transaksi', $data);
+        $this->db->update('transaksi_inventaris', $data);
     }
 
     public function cariDataTransaksi()
     {
         $keyword = $this->input->post('keyword');
-        $this->db->like('nama', $keyword);
-        $this->db->or_like('nama_kategori', $keyword);
-        return $this->db->get('transaksi')->result_array();
+        $this->db->like('tanggal_pinjam', $keyword);
+        $this->db->or_like('nama', $keyword);
+        return $this->db->get('transaksi_inventaris')->result_array();
     }
 }
 

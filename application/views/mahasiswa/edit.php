@@ -2,7 +2,7 @@
     <div class="row mt-3">
         <div class="col-md-6">
             <div class="card-header">
-                Form Edit Data Peminjaman
+                Form Edit Data Peminjamanaaa
             </div>
             <div class="card-body">
                 <?php if (validation_errors()) : ?>
@@ -21,6 +21,10 @@
                 <p class="card-text">
                     <label for=""><b>Tanggal Pinjam :</b></label>
                     <?= $transaksi->tanggal_pinjam; ?>
+                </p>
+                <p class="card-text">
+                    <label for=""><b>Id Transaksi :</b></label>
+                    <?= $transaksi->id_transaksi; ?>
                 </p>
                 <p class="card-text">
                     <label for=""><b>Tanggal Kembali :</b></label>

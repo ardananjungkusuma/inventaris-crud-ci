@@ -9,6 +9,8 @@ class transaksi extends CI_Controller
         //digunakan untuk menjalankan fungsi construct pada class parent(ci_controller)
         parent::__construct();
         $this->load->model('transaksi_model');
+        $this->load->model('barang_model');
+        $this->load->model('mahasiswa_model');
     }
 
 
@@ -17,8 +19,7 @@ class transaksi extends CI_Controller
         //modul untuk load database
         // $this->load->database();
         $data['title'] = 'List Transaksi Inventaris JTI';
-        $data['transaksi'] = $this->transaksi_model->getAllTransaksi();
-        $data['gabungan'] = $this->transaksi_model->getAllTransaksiUserKategori();
+        $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategori();
         if ($this->input->post('keyword')) {
             #code..
             $data['transaksi'] = $this->transaksi_model->cariDataTransaksi();
@@ -32,12 +33,10 @@ class transaksi extends CI_Controller
     {
         $data['title'] = 'Form Menambahkan Data Transaksi';
         $this->load->library('form_validation');
-        $data['pegawai'] = $this->transaksi_model->getAllPegawai();
-        $data['kategori'] = $this->transaksi_model->getAllKategori();
-        $this->form_validation->set_rules('id_user', 'Id_user', 'required');
-        $this->form_validation->set_rules('id_kategori', 'Id_kategori', 'required');
-        $this->form_validation->set_rules('jumlah_nominal', 'Jumlah_nominal', 'required');
-
+        $data['barang'] = $this->barang_model->getAllBarang();
+        $data['mahasiswa'] = $this->mahasiswa_model->getAllMahasiswa();
+        $this->form_validation->set_rules('id_barang', 'Id_barang', 'required');
+        $this->form_validation->set_rules('id_mahasiswa', 'Id_mahasiswa', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             #code...
@@ -47,47 +46,36 @@ class transaksi extends CI_Controller
         } else {
             #code...
             $this->transaksi_model->tambahdatatransaksi();
-            $this->session->set_flashdata('flash-data', 'ditambahkan');
+            $this->session->set_flashdata('flash-data', 'Data Ditambahkan');
             redirect('transaksi', 'refresh');
         }
     }
 
-    public function hapus($id)
-    {
-        $this->mahasiswa_model->hapusdatamhs($id);
-        //untuk flashdata memiliki 2 parameter (nama flashdata/alias, isi flashdata)
-        $this->session->flashdata('flash-data-hapus', 'Dihapus');
-        redirect('mahasiswa', 'refresh');
-    }
-
     public function detail($id)
     {
-        $data['title'] = 'Detail Mahasiswa';
-        $data['mahasiswa'] = $this->mahasiswa_model->getmahasiswabyid($id);
+        $data['title'] = 'Detail Peminjaman';
+        $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategoriById($id);
         $this->load->view('template/header', $data);
-        $this->load->view('mahasiswa/detail', $data);
+        $this->load->view('transaksi/detail', $data);
         $this->load->view('template/footer');
     }
 
     public function edit($id)
     {
-        $data['title'] = 'Form Edit Mahasiswa';
-        $data['mahasiswa'] = $this->mahasiswa_model->getmahasiswabyid($id);
-        $data['jurusan'] = ['Teknologi Informasi', 'kimia', 'Teknik Industri', 'mesin'];
+        $data['title'] = 'Form Edit Peminjaman';
+        $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategoriById($id);
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('nim', 'Nim', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-
+        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('tanggal_dikembalikan', 'Tanggal_dikembalikan', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('template/header', $data);
-            $this->load->view('mahasiswa/edit', $data);
+            $this->load->view('transaksi/edit', $data);
             $this->load->view('template/footer');
         } else {
-            $this->mahasiswa_model->ubahdatamhs();
+            $this->transaksi_model->ubahDataTransaksi($id);
             $this->session->set_flashdata('flash-data', 'diedit');
-            redirect('mahasiswa', 'refresh');
+            redirect('transaksi', 'refresh');
         }
     }
 }

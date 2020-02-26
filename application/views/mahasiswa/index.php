@@ -3,7 +3,7 @@
         <div class="row mt-4">
             <div class="col-md-6">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Transaksi<strong> berhasil </strong><?php echo $this->session->flashdata('flash-data'); ?>
+                    Data Mahasiswa<strong> berhasil </strong><?php echo $this->session->flashdata('flash-data'); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -15,7 +15,7 @@
         <div class="row mt-4">
             <div class="col-md-6">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Transaksi<strong> berhasil </strong><?php echo $this->session->flashdata('flash-data-hapus'); ?>
+                    Data Mahasiswa<strong> berhasil </strong><?php echo $this->session->flashdata('flash-data-hapus'); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -26,14 +26,14 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <a href="<?= base_url(); ?>transaksi/tambah" class="btn btn-primary">Tambah Peminjaman</a>
+            <a href="<?= base_url(); ?>mahasiswa/tambah" class="btn btn-primary">Tambah Data</a>
         </div>
     </div>
     <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari Data Transaksi" name="keyword">
+                    <input type="text" class="form-control" placeholder="Cari Data Mahasiswa" name="keyword">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">Cari Data</button>
                     </div>
@@ -42,50 +42,36 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-lg-12">
-            <h2>Daftar Transaksi</h2>
 
-            <?php if (empty($transaksi)) : ?>
+        <div class="col-lg-12" style="margin: 0 auto;">
+            <h2>Daftar Mahasiswa</h2>
+            <?php if (empty($mahasiswa)) : ?>
                 <div class="alert alert-danger" role="alert">
-                    Data Transaksi tidak ditemukan
+                    Data Mahasiswa
                 </div>
             <?php endif; ?>
             <table class="table table-striped">
-                <tr style="background-color: cornflowerblue">
+                <tr style="background-color:darkcyan">
                     <td>Nama Mahasiswa</td>
-                    <td>Barang Yang Dipinjam</td>
-                    <td>Status Peminjaman</td>
+                    <td>NIM</td>
                     <td>Aksi</td>
                 </tr>
                 <?php
-                foreach ($transaksi as $trans) : ?>
+                foreach ($mahasiswa as $mhs) : ?>
                     <tr>
                         <td>
-                            <?= $trans['nama']; ?>
+                            <?= $mhs['nama']; ?>
                         </td>
                         <td>
-                            <?= $trans['nama_barang']; ?>
+                            <?= $mhs['nim']; ?>
                         </td>
                         <td>
-                            <?= $trans['status']; ?>
+                            <a href=" <?php echo base_url(); ?>mahasiswa/hapusDataMahasiswa/<?php echo $mhs['id_mahasiswa']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
+                            <a href="<?= base_url(); ?>mahasiswa/edit/<?= $mhs['id_mahasiswa']; ?>" class="btn btn-success float-center">Edit Mahasiswa</a>
+                            <a href="<?php echo base_url(); ?>mahasiswa/detail/<?php echo $mhs['id_mahasiswa']; ?>" class="btn btn-primary float-center">Detail</a>
                         </td>
-                        <?php
-                        if ($trans['status'] == "Sudah Dikembalikan" or $trans['status'] == "Dikembalikan Terlambat") {
-                        ?>
-                            <td>
-                                <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
-                            </td>
-                        <?php
-                        } else {
-                        ?>
-                            <td>
-                                <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit Peminjaman</a>
-                                <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
-                            </td>
                     </tr>
-            <?php
-                        }
-                    endforeach; ?>
+                <?php endforeach; ?>
             </table>
 
 
