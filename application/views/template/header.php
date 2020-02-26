@@ -27,8 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="<?= base_url(); ?>">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="<?= base_url(); ?>mahasiswa">Data Mahasiswa</a>
-                <a class="nav-item nav-link" href="<?= base_url(); ?>">About</a>
+                <a class="nav-item nav-link" href="<?= base_url(); ?>transaksi">Data Transaksi</a>
                 <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
             </div>
         </div>

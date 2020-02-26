@@ -1,1 +1,1 @@
-<h1>Hello, <?php echo $name ?></h1>
+<h1>Managed Pemasukan Pengeluaran</h1>

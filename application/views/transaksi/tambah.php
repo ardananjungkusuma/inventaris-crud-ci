@@ -12,7 +12,7 @@
                 <?php endif ?>
                 <form action="" method="POST">
                     <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama"></label>
                         <input type="text" class="form-control" id="nama" name="nama">
                     </div>
                     <div class="form-group">
@@ -24,10 +24,11 @@
                         <input type="email" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="jurusan">Jurusan</label>
+                        <label for="jurusan">Kategori</label>
                         <select name="jurusan" class="form-control" id="jurusan" name="jurusan">
-                            <?php foreach ($jurusan as $key) : ?>
-                                <option value="<?= $key ?>" selected><?= $key ?></option>
+                            <?php foreach ($kategori as $kat) : ?>
+                                <option value="<?= $kat ?>"><?= $kat ?></option>
+                                //fix ini
                             <?php endforeach; ?>
                         </select>
                     </div>
