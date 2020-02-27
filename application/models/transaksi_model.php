@@ -65,10 +65,12 @@ class transaksi_model extends CI_Model
     public function cariDataTransaksi()
     {
         $keyword = $this->input->post('keyword');
-        $this->db->like('tanggal_pinjam', $keyword);
-        $this->db->or_like('nama', $keyword);
+        $this->db->select('t.id_transaksi,m.nama,b.nama_barang,b.merk,t.status');
+        $this->db->from('transaksi_inventaris t');
+        $this->db->join('mahasiswa m', 'm.id_mahasiswa = t.id_mahasiswa');
+        $this->db->join('barang b', 'b.id_barang = t.id_barang');
+        $this->db->like('m.nama', $keyword);
+        $this->db->or_like('b.nama_barang', $keyword);
         return $this->db->get('transaksi_inventaris')->result_array();
     }
 }
-
-/* End of file Controllername.php */

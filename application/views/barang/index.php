@@ -33,7 +33,7 @@
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari Data Barang" name="keyword">
+                    <input type="text" class="form-control" placeholder="Cari Nama/Merk Barang" name="keyword">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">Cari Data</button>
                     </div>
