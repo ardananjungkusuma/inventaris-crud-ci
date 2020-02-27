@@ -80,11 +80,9 @@ class mahasiswa extends CI_Controller
             $this->load->view('mahasiswa/edit', $data);
             $this->load->view('template/footer');
         } else {
-            $this->mahasiswa_model->ubahDataMahasiswa($id);
+            $this->mahasiswa_model->ubahDataMahasiswa();
             $this->session->set_flashdata('flash-data', 'diedit');
             redirect('mahasiswa', 'refresh');
         }
     }
 }
-
-/* End of file Controllername.php */

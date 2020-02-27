@@ -2,7 +2,7 @@
     <div class="row mt-3">
         <div class="col-md-6">
             <div class="card-header">
-                Form Edit Data Peminjamanaaa
+                Form Edit Data Mahasiswa
             </div>
             <div class="card-body">
                 <?php if (validation_errors()) : ?>
@@ -10,42 +10,26 @@
                         <?php echo validation_errors() ?>
                     </div>
                 <?php endif ?>
-                <p class="card-text">
-                    <label for=""><b>Nama User :</b></label>
-                    <?php echo $transaksi->nama; ?>
-                </p>
-                <p class="card-text">
-                    <label for=""><b>Barang yang Dipinjam :</b></label>
-                    <?= $transaksi->nama_barang; ?>
-                </p>
-                <p class="card-text">
-                    <label for=""><b>Tanggal Pinjam :</b></label>
-                    <?= $transaksi->tanggal_pinjam; ?>
-                </p>
-                <p class="card-text">
-                    <label for=""><b>Id Transaksi :</b></label>
-                    <?= $transaksi->id_transaksi; ?>
-                </p>
-                <p class="card-text">
-                    <label for=""><b>Tanggal Kembali :</b></label>
-                    <?= $transaksi->tanggal_kembali; ?>
-                </p>
                 <form action="" method="POST">
-                    <input type="hidden" name="id_transaksi" value="<?= $transaksi->id_transaksi; ?>">
+                    <input type="hidden" name="id_mahasiswa" value="<?= $mahasiswa->id_mahasiswa; ?>">
                     <div class="form-group">
-                        <label for="tanggal_dikembalikan">Tanggal Dikembalikan :</label>
-                        <input type="date" class="form-control" id="tanggal_dikembalikan" name="tanggal_dikembalikan">
+                        <label for="nama">Nama Mahasiswa :</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $mahasiswa->nama; ?>">
                     </div>
                     <div class="form-group">
-                        <label for="status">Status Peminjaman</label>
-                        <select name="status" class="form-control" id="status" name="status">
-                            <option selected>Pilih Status</option>
-                            <option value="Sudah Dikembalikan">Sudah Dikembalikan</option>
-                            <option value="Belum Dikembalikan">Belum Dikembalikan</option>
-                            <option value="Dikembalikan Terlambat">Dikembalikan Terlambat</option>
-                        </select>
+                        <label for="nim">NIM Mahasiswa :</label>
+                        <input type="number" class="form-control" id="nim" name="nim" value="<?= $mahasiswa->nim; ?>">
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary float-right">Submit Data</button>
+                    <div class="form-group">
+                        <label for="no_hp">Nomor Handphone :</label>
+                        <input type="number" class="form-control" id="no_hp" name="no_hp" value="<?= $mahasiswa->no_hp; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat Rumah :</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $mahasiswa->alamat; ?>">
+                    </div>
+                    <a href="<?= base_url('mahasiswa'); ?>" class="btn btn-primary">Kembali</a>
+                    <button type="submit" name="submit" class="btn btn-success float-right">Update Data</button>
                 </form>
             </div>
         </div>

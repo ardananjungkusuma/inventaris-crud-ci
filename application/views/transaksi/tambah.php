@@ -16,7 +16,7 @@
                         <select class="form-control" name="id_mahasiswa" id="id_mahasiswa">
                             <option selected="selected">Pilih Nama Mahasiswa</option>
                             <?php foreach ($mahasiswa as $mhs) : ?>
-                                <option value="<?= $mhs['id_mahasiswa'] ?>"><?= $mhs['nama'] ?></option>
+                                <option value="<?= $mhs['id_mahasiswa'] ?>"><?= $mhs['nama'] ?> - <?= $mhs['nim'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                         <select class="form-control" name="id_barang" id="id_barang">
                             <option selected="selected">Pilih Barang</option>
                             <?php foreach ($barang as $brg) : ?>
-                                <option value="<?= $brg['id_barang'] ?>"><?= $brg['nama_barang'] ?></option>
+                                <option value="<?= $brg['id_barang'] ?>"><?= $brg['nama_barang'] ?> <?= $brg['merk'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

@@ -43,6 +43,16 @@ class transaksi_model extends CI_Model
 
     public function ubahDataTransaksi()
     {
+        $status_pengembalian = $this->input->post('status', true);
+        if ($status_pengembalian == "Sudah Dikembalikan" or $status_pengembalian == "Dikembalikan Terlambat") {
+            $id_barangnya = $this->input->post('id_barang', true);
+            $queryGetJumlah = $this->db->query("select * from barang where id_barang = $id_barangnya");
+            foreach ($queryGetJumlah->result() as $row) {
+                $tambahBarang = $row->jumlah_barang + 1;
+            }
+            $this->db->query("UPDATE barang SET jumlah_barang = $tambahBarang WHERE id_barang = $id_barangnya");
+        }
+
         $data = [
             "tanggal_dikembalikan" => $this->input->post('tanggal_dikembalikan', true),
             "status" => $this->input->post('status', true)

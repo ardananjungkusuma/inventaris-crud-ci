@@ -31,18 +31,16 @@ class mahasiswa_model extends CI_Model
 
     public function getMahasiswaById($id)
     {
-        return $this->db->get_where('mahasiswa', ['id_mahasiswa' => $id])->row_array();
+        return $this->db->get_where('mahasiswa', ['id_mahasiswa' => $id])->row();
     }
 
     public function ubahDataMahasiswa()
     {
         $data = [
-            "id_mahasiswa" => $this->input->post('id_mahasiswa', true),
             "nama" => $this->input->post('nama', true),
             "nim" => $this->input->post('nim', true),
             "no_hp" => $this->input->post('no_hp', true),
             "alamat" => $this->input->post('alamat', true)
-            //terakhir sampe sini, delete sudah ubah sudah
         ];
 
         $this->db->where('id_mahasiswa', $this->input->post('id_mahasiswa', true));
@@ -57,5 +55,3 @@ class mahasiswa_model extends CI_Model
         return $this->db->get('mahasiswa')->result_array();
     }
 }
-
-/* End of file Controllername.php */

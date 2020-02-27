@@ -27,6 +27,7 @@
                     <?= $transaksi->tanggal_kembali; ?>
                 </p>
                 <form action="" method="POST">
+                    <input type="hidden" name="id_barang" value="<?= $transaksi->id_barang; ?>">
                     <input type="hidden" name="id_transaksi" value="<?= $transaksi->id_transaksi; ?>">
                     <div class="form-group">
                         <label for="tanggal_dikembalikan">Tanggal Dikembalikan :</label>

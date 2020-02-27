@@ -51,8 +51,8 @@
                 </div>
             <?php endif; ?>
             <table class="table table-striped">
-                <tr style="background-color: cornflowerblue">
-                    <td>Nama Mahasiswa</td>
+                <tr style="background-color: cornflowerblue;color:white">
+                    <td>Nama Peminjam</td>
                     <td>Barang Yang Dipinjam</td>
                     <td>Status Peminjaman</td>
                     <td>Aksi</td>
@@ -64,7 +64,7 @@
                             <?= $trans['nama']; ?>
                         </td>
                         <td>
-                            <?= $trans['nama_barang']; ?>
+                            <?= $trans['nama_barang']; ?> <?= $trans['merk'] ?>
                         </td>
                         <td>
                             <?= $trans['status']; ?>
@@ -79,7 +79,7 @@
                         } else {
                         ?>
                             <td>
-                                <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit Peminjaman</a>
+                                <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit</a>
                                 <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
                             </td>
                     </tr>
