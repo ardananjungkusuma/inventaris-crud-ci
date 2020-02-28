@@ -65,7 +65,8 @@ class transaksi_model extends CI_Model
     public function cariDataTransaksi()
     {
         $keyword = $this->input->post('keyword');
-        $this->db->select('t.id_transaksi,m.nama,b.nama_barang,b.merk,t.status');
+        $this->db->distinct();
+        $this->db->select('t.id_transaksi,m.nama,b.nama_barang,b.merk,t.tanggal_pinjam,,t.status');
         $this->db->from('transaksi_inventaris t');
         $this->db->join('mahasiswa m', 'm.id_mahasiswa = t.id_mahasiswa');
         $this->db->join('barang b', 'b.id_barang = t.id_barang');

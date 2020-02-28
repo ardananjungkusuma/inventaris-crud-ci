@@ -50,7 +50,8 @@
                     Data Transaksi tidak ditemukan
                 </div>
             <?php endif; ?>
-            <table class="table table-striped">
+
+            <table class="table table-striped" id="myTable">
                 <tr style="background-color: cornflowerblue;color:white">
                     <td>Nama Peminjam</td>
                     <td>Barang Yang Dipinjam</td>
@@ -87,8 +88,6 @@
                         }
                     endforeach; ?>
             </table>
-
-
         </div>
     </div>
 </div>
