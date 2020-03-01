@@ -3,10 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class barang extends CI_Controller
 {
-    //fungsi yang akan dijalankan saat classnya diinstansiasi
     public function __construct()
     {
-        //digunakan untuk menjalankan fungsi construct pada class parent(ci_controller)
         parent::__construct();
         $this->load->model('barang_model');
     }
@@ -29,8 +27,6 @@ class barang extends CI_Controller
     {
         $data['title'] = 'Form Menambahkan Data Barang';
         $this->load->library('form_validation');
-
-        // $this->$this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
         $this->form_validation->set_rules('nama_barang', 'Nama_barang', 'trim|required');
         $this->form_validation->set_rules('merk', 'Merk', 'trim|required');
         $this->form_validation->set_rules('jumlah_barang', 'Jumlah_barang', 'trim|required');

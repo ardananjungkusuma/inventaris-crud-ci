@@ -19,6 +19,10 @@
                     <?= $transaksi->nama_barang; ?>
                 </p>
                 <p class="card-text">
+                    <label for=""><b>Merk Barang :</b></label>
+                    <?= $transaksi->merk; ?>
+                </p>
+                <p class="card-text">
                     <label for=""><b>Tanggal Pinjam :</b></label>
                     <?= $transaksi->tanggal_pinjam; ?>
                 </p>
@@ -42,8 +46,9 @@
                             <option value="Dikembalikan Terlambat">Dikembalikan Terlambat</option>
                         </select>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary float-right">Submit Data</button>
+                    <button type="submit" name="submit" class="btn btn-success float-right">Submit Data</button>
                 </form>
+                <a href="<?= base_url(); ?>transaksi" class="btn btn-primary">Kembali</a>
             </div>
         </div>
     </div>

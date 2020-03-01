@@ -3,10 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class transaksi extends CI_Controller
 {
-    //fungsi yang akan dijalankan saat classnya diinstansiasi
     public function __construct()
     {
-        //digunakan untuk menjalankan fungsi construct pada class parent(ci_controller)
         parent::__construct();
         $this->load->model('transaksi_model');
         $this->load->model('barang_model');
@@ -16,8 +14,6 @@ class transaksi extends CI_Controller
 
     public function index()
     {
-        //modul untuk load database
-        // $this->load->database();
         $data['title'] = 'List Transaksi Inventaris JTI';
         $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategori();
         if ($this->input->post('keyword')) {

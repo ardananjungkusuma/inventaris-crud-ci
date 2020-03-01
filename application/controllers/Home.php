@@ -10,7 +10,6 @@ class Home extends CI_Controller
         $data['title'] = 'Home';
         $data['name'] = $name;
         $this->load->view('template/header', $data);
-        // echo "Selamat Datang di Halaman home";
         $this->load->view('home/index', $data);
         $this->load->view('template/footer');
     }

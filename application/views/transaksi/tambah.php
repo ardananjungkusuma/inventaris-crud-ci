@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-3">
-        <div class="col-md-6">
-            <div class="card-header">
+        <div class="col-md-6" style="margin: 0 auto;">
+            <div class="card-header" style="background-color: rebeccapurple;color:white">
                 Form Tambah Data Transaksi
             </div>
             <div class="card-body">

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col-md-6" style="margin: 0 auto;">
-            <div class="card-header" style="background-color: #8AD0D6">
+            <div class="card-header" style="background-color: orangered;color:white">
                 Form Tambah Data Mahasiswa
             </div>
             <div class="card-body">

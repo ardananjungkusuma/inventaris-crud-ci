@@ -16,6 +16,10 @@
                         <?= $transaksi->nama_barang; ?>
                     </p>
                     <p class="card-text">
+                        <label for=""><b>Merk Barang :</b></label>
+                        <?= $transaksi->merk; ?>
+                    </p>
+                    <p class="card-text">
                         <label for=""><b>Tanggal Pinjam :</b></label>
                         <?= $transaksi->tanggal_pinjam; ?>
                     </p>
