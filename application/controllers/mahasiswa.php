@@ -3,10 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class mahasiswa extends CI_Controller
 {
-    //fungsi yang akan dijalankan saat classnya diinstansiasi
     public function __construct()
     {
-        //digunakan untuk menjalankan fungsi construct pada class parent(ci_controller)
         parent::__construct();
         $this->load->model('mahasiswa_model');
     }
@@ -30,7 +28,6 @@ class mahasiswa extends CI_Controller
         $data['title'] = 'Form Menambahkan Data Mahasiswa';
         $this->load->library('form_validation');
 
-        // $this->$this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         $this->form_validation->set_rules('nim', 'Nim', 'trim|required');
         $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
