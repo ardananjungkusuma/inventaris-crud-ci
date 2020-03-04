@@ -7,6 +7,16 @@ class mahasiswa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('mahasiswa_model');
+
+        if ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
+            $this->session->sess_destroy();
+            $data['pesan'] = "Maaf Anda Belum Aktif, Tolong Hubungi Admin";
+            $data['title'] = 'Login User';
+            $this->load->view('auth/template/header', $data);
+            $this->load->view('auth/login', $data);
+        } elseif ($this->session->userdata('level') != "user" and $this->session->userdata('level') != "admin") {
+            redirect('auth', 'refresh');
+        }
     }
 
 

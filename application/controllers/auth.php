@@ -18,7 +18,7 @@ class auth extends CI_Controller
         }
         $data['title'] = 'Inventaris Lab JTI';
         $this->load->view('auth/template/header', $data);
-        $this->load->view('auth');
+        $this->load->view('auth/index');
     }
 
     public function login()
@@ -62,11 +62,17 @@ class auth extends CI_Controller
             $this->session->set_userdata('id_user', $row->id_user);
             $this->session->set_userdata('user', $row->username);
             $this->session->set_userdata('level', $row->level);
-
+            $this->session->set_userdata('status', $row->status);
             if ($this->session->userdata('level') == "admin") {
                 redirect('admin');
-            } elseif ($this->session->userdata('level') == "user") {
-                redirect('user');
+            } elseif ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
+                $this->session->sess_destroy();
+                $data['pesan'] = "Maaf Anda Belum Aktif, Tolong Hubungi Admin";
+                $data['title'] = 'Login User';
+                $this->load->view('auth/template/header', $data);
+                $this->load->view('auth/login', $data);
+            } elseif ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Aktif") {
+                redirect('user/index');
             }
         } else {
             $data['pesan'] = "Maaf Username dan Password anda salah!";
@@ -79,20 +85,17 @@ class auth extends CI_Controller
     public function prosesRegister()
     {
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-        $this->form_validation->set_rules('kewarganegaraan', 'Kewarganegaraan', 'trim|required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
-        $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[password2]', [
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passwordConf]', [
             'matches' => 'Password Doesnt Match',
             'min_length' => 'Password minimum 6 character'
         ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[6]|matches[password]');
+        $this->form_validation->set_rules('passwordConf', 'Password', 'required|trim|min_length[6]|matches[password]');
 
 
         if ($this->form_validation->run() == FALSE) {
-            $data['title'] = 'User Login';
+            $data['title'] = 'User Register';
             $this->load->view('auth/template/header', $data);
             $this->load->view('auth/register');
         } else {

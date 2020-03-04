@@ -11,6 +11,15 @@
                     </div>
                 <?php endif ?>
                 <h4 style="text-align: center">Login</h4><br>
+                <?php
+                if (isset($pesan)) {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $pesan; ?>
+                    </div>
+                <?php
+                }
+                ?>
                 <form action="" method="POST">
                     <div class="form-group">
                         <label for="username">Username</label>

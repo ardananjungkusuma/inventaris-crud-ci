@@ -27,10 +27,8 @@ class auth_model extends CI_Model
             'password' => htmlspecialchars(MD5($this->input->post('password'))),
             'email' => htmlspecialchars($this->input->post('email', true)),
             'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'alamat' => htmlspecialchars($this->input->post('alamat', true)),
-            'no_hp' => htmlspecialchars($this->input->post('no_hp', true)),
-            'kewarganegaraan' => htmlspecialchars($this->input->post('kewarganegaraan', true)),
-            'level' => 'user'
+            'level' => 'user',
+            'status' => 'Tidak Aktif'
         ];
         $this->db->insert('user', $data);
     }
