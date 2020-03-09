@@ -36,7 +36,7 @@ class user extends CI_Controller
 
         $this->user_model->hapusDataUser($id);
         $this->session->flashdata('flash-data-hapus', 'Dihapus');
-        redirect('user/list', 'refresh');
+        redirect('user/listUser', 'refresh');
     }
 
     public function detail($id)
@@ -50,6 +50,8 @@ class user extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Form Edit User';
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
+        $data['level'] = ['admin', 'user', 'kalab'];
         $data['user'] = $this->user_model->getUserById($id);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');

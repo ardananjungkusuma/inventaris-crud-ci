@@ -19,20 +19,26 @@
                         <input type="text" class="form-control" id="username" name="username" value="<?= $user->username; ?>">
                         <label>Email :</label>
                         <input type="email" class="form-control" id="email" name="email" value="<?= $user->email; ?>">
-                        <label>Level :</label>
-                        <select class="form-control" name="level">
-                            <option selected>Choose Level</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                        <label>Status</label>
+                        <select class="form-control" name="status">
+                            <?php foreach ($status as $st) : ?>
+                                <?php if ($st == $user->status) : ?>
+                                    <option value="<?= $user->status ?>" selected><?= $user->status ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $st ?>"><?= $st ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </select>
-                        <small style="background-color: orangered;color:white">*Level User <?= $user->username; ?> = <?= $user->level; ?></small><br>
-                        <label>Status :</label>
-                        <select name="status" class="form-control">
-                            <option selected>Choose Status</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
-                            <option value="Aktif">Aktif</option>
+                        <label>Level : </label>
+                        <select name="level" class="form-control">
+                            <?php foreach ($level as $lv) : ?>
+                                <?php if ($lv == $user->level) : ?>
+                                    <option value="<?= $user->level ?>" selected><?= $user->level ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $lv ?>"><?= $lv ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </select>
-                        <small style="background-color: orangered;color:white">Status User <?= $user->username; ?> = <?= $user->status; ?></small>
                     </div>
                     <a href="<?= base_url('user/listUser'); ?>" class="btn btn-primary">Kembali</a>
                     <button type="submit" name="submit" class="btn btn-success float-right">Update Data</button>
