@@ -80,8 +80,19 @@
                         } else {
                         ?>
                             <td>
-                                <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit</a>
-                                <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
+                                <?php
+                                $status_login = $this->session->userdata('level');
+                                if ($status_login == 'user') {
+                                ?>
+                                    <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
+                                <?php
+                                } else {
+                                ?>
+                                    <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit</a>
+                                    <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
+                                <?php
+                                }
+                                ?>
                             </td>
                     </tr>
             <?php

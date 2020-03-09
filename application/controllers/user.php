@@ -27,7 +27,7 @@ class user extends CI_Controller
             redirect('admin', 'refresh');
         }
         $data['title'] = 'User Dashboard';
-        $this->load->view('template/header', $data);
+        $this->load->view('user/header', $data);
         $this->load->view('user/index');
     }
 

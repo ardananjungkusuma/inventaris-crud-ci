@@ -1,6 +1,6 @@
 <h3 style="margin-top: 60px">
     <center>
-        Welcome <?= $this->session->userdata('user') ?><br>
+        Welcome Admin <?= $this->session->userdata('user') ?><br>
         Sistem Manajemen Inventaris Lab Komputer<br>
         <img src="<?= base_url('assets/img/polinema.png') ?>" style="margin-top: 80px" width="150px"><br>
     </center>

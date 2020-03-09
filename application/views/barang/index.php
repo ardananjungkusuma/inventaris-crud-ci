@@ -70,9 +70,20 @@
                             <?= $brg['jumlah_barang']; ?> Unit
                         </td>
                         <td>
-                            <a href=" <?php echo base_url(); ?>barang/hapus/<?php echo $brg['id_barang']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
-                            <a href="<?= base_url(); ?>barang/edit/<?= $brg['id_barang']; ?>" class="btn btn-success float-center">Edit</a>
-                            <a href="<?php echo base_url(); ?>barang/detail/<?php echo $brg['id_barang']; ?>" class="btn btn-primary float-center">Detail</a>
+                            <?php
+                            $status_login = $this->session->userdata('level');
+                            if ($status_login == 'admin' || $status_login == 'kalab') {
+                            ?>
+                                <a href=" <?php echo base_url(); ?>barang/hapus/<?php echo $brg['id_barang']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
+                                <a href="<?= base_url(); ?>barang/edit/<?= $brg['id_barang']; ?>" class="btn btn-success float-center">Edit</a>
+                                <a href="<?php echo base_url(); ?>barang/detail/<?php echo $brg['id_barang']; ?>" class="btn btn-primary float-center">Detail</a>
+                            <?php
+                            } else {
+                            ?>
+                                <a href="<?php echo base_url(); ?>barang/detail/<?php echo $brg['id_barang']; ?>" class="btn btn-primary float-center">Detail</a>
+                            <?php
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

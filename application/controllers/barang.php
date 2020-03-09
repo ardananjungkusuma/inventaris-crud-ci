@@ -28,36 +28,62 @@ class barang extends CI_Controller
             #code..
             $data['barang'] = $this->barang_model->cariDataBarang();
         }
-        $this->load->view('template/header', $data);
-        $this->load->view('barang/index', $data);
-        $this->load->view('template/footer');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'admin') {
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('barang/index', $data);
+            $this->load->view('template/footer');
+        } elseif ($status_login == 'user') {
+            $this->load->view('user/header', $data);
+            $this->load->view('barang/index', $data);
+            $this->load->view('template/footer');
+        } elseif ($status_login == 'kalab') {
+            $this->load->view('template/header', $data);
+            $this->load->view('barang/index', $data);
+            $this->load->view('template/footer');
+        } else {
+            redirect('auth', 'refresh');
+        }
     }
 
     public function tambah()
     {
-        $data['title'] = 'Form Menambahkan Data Barang';
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama_barang', 'Nama_barang', 'trim|required');
-        $this->form_validation->set_rules('merk', 'Merk', 'trim|required');
-        $this->form_validation->set_rules('jumlah_barang', 'Jumlah_barang', 'trim|required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
-            $this->load->view('barang/tambah', $data);
-            $this->load->view('template/footer');
-        } else {
-            $this->barang_model->tambahDataBarang();
-            $this->session->set_flashdata('flash-data', 'ditambahkan');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
             redirect('barang', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $data['title'] = 'Form Menambahkan Data Barang';
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('nama_barang', 'Nama_barang', 'trim|required');
+            $this->form_validation->set_rules('merk', 'Merk', 'trim|required');
+            $this->form_validation->set_rules('jumlah_barang', 'Jumlah_barang', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('template/header', $data);
+                $this->load->view('barang/tambah', $data);
+                $this->load->view('template/footer');
+            } else {
+                $this->barang_model->tambahDataBarang();
+                $this->session->set_flashdata('flash-data', 'ditambahkan');
+                redirect('barang', 'refresh');
+            }
+        } else {
+            redirect('auth', 'refresh');
         }
     }
 
     public function hapus($id)
     {
-
-        $this->barang_model->hapusDataBarang($id);
-        $this->session->flashdata('flash-data-hapus', 'Dihapus');
-        redirect('barang', 'refresh');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
+            redirect('barang', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $this->barang_model->hapusDataBarang($id);
+            $this->session->flashdata('flash-data-hapus', 'Dihapus');
+            redirect('barang', 'refresh');
+        } else {
+            redirect('auth', 'refresh');
+        }
     }
 
     public function detail($id)
@@ -71,22 +97,28 @@ class barang extends CI_Controller
 
     public function edit($id)
     {
-        $data['title'] = 'Form Edit Barang';
-        $data['barang'] = $this->barang_model->getBarangById($id);
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama_barang', 'Nama_barang', 'trim|required');
-        $this->form_validation->set_rules('merk', 'Merk', 'trim|required');
-        $this->form_validation->set_rules('jumlah_barang', 'Jumlah_barang', 'trim|required');
-
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
-            $this->load->view('barang/edit', $data);
-            $this->load->view('template/footer');
-        } else {
-            $this->barang_model->ubahDataBarang();
-            $this->session->set_flashdata('flash-data', 'diedit');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
             redirect('barang', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $data['title'] = 'Form Edit Barang';
+            $data['barang'] = $this->barang_model->getBarangById($id);
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('nama_barang', 'Nama_barang', 'trim|required');
+            $this->form_validation->set_rules('merk', 'Merk', 'trim|required');
+            $this->form_validation->set_rules('jumlah_barang', 'Jumlah_barang', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('template/header', $data);
+                $this->load->view('barang/edit', $data);
+                $this->load->view('template/footer');
+            } else {
+                $this->barang_model->ubahDataBarang();
+                $this->session->set_flashdata('flash-data', 'diedit');
+                redirect('barang', 'refresh');
+            }
+        } else {
+            redirect('auth', 'refresh');
         }
     }
 }

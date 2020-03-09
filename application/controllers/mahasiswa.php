@@ -8,13 +8,15 @@ class mahasiswa extends CI_Controller
         parent::__construct();
         $this->load->model('mahasiswa_model');
 
-        if ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
+        if ($this->session->userdata('level') == "kalab" and $this->session->userdata('status') == "Tidak Aktif") {
             $this->session->sess_destroy();
             $data['pesan'] = "Maaf Anda Belum Aktif, Tolong Hubungi Admin";
             $data['title'] = 'Login User';
             $this->load->view('auth/template/header', $data);
             $this->load->view('auth/login', $data);
-        } elseif ($this->session->userdata('level') != "user" and $this->session->userdata('level') != "admin") {
+        } elseif ($this->session->userdata('level') == "user") {
+            redirect('user', 'refresh');
+        } elseif ($this->session->userdata('level') != "kalab" and $this->session->userdata('level') != "admin" and $this->session->userdata('level') != "user") {
             redirect('auth', 'refresh');
         }
     }
@@ -28,7 +30,7 @@ class mahasiswa extends CI_Controller
             #code..
             $data['mahasiswa'] = $this->mahasiswa_model->cariDataMahasiswa();
         }
-        $this->load->view('template/header', $data);
+        $this->load->view('admin/template/header', $data);
         $this->load->view('mahasiswa/index', $data);
         $this->load->view('template/footer');
     }

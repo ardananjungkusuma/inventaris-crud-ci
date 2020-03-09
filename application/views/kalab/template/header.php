@@ -29,7 +29,6 @@
                 <a class="nav-item nav-link" href="<?= base_url(); ?>transaksi">Data Transaksi</a>
                 <a class="nav-item nav-link" href="<?= base_url(); ?>barang">Data Barang</a>
                 <a class="nav-item nav-link" href="<?= base_url(); ?>mahasiswa">Data Mahasiswa</a>
-                <a class="nav-item nav-link" href="<?= base_url(); ?>user/listUser">Data User</a>
                 <a class="nav-item nav-link" href="<?= base_url(); ?>auth/logout">Logout</a>
             </div>
         </div>
