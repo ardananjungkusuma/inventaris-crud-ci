@@ -23,11 +23,6 @@ class auth extends CI_Controller
 
     public function login()
     {
-        if ($this->session->userdata('level') == "user") {
-            redirect('user', 'refresh');
-        } elseif ($this->session->userdata('level') == "admin") {
-            redirect('admin', 'refresh');
-        }
         $data['title'] = 'User Login';
         $this->load->view('auth/template/header', $data);
         $this->load->view('auth/login');
@@ -88,10 +83,9 @@ class auth extends CI_Controller
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passwordConf]', [
-            'matches' => 'Password Doesnt Match',
-            'min_length' => 'Password minimum 6 character'
+            'matches' => 'Password Doesn"t Match',
         ]);
-        $this->form_validation->set_rules('passwordConf', 'Password', 'required|trim|min_length[6]|matches[password]');
+        $this->form_validation->set_rules('passwordConf', 'Confirmation Password', 'required|trim|min_length[6]|matches[password]');
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -103,7 +97,7 @@ class auth extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Congratulations, your account has been created.
           </div>');
-            redirect('auth');
+            redirect('auth/login');
         }
     }
 

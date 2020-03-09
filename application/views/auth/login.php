@@ -11,6 +11,7 @@
                     </div>
                 <?php endif ?>
                 <h4 style="text-align: center">Login</h4><br>
+                <?= $this->session->flashdata('message'); ?>
                 <?php
                 if (isset($pesan)) {
                 ?>

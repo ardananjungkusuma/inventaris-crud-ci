@@ -23,6 +23,9 @@ class user extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('level') == "admin") {
+            redirect('admin', 'refresh');
+        }
         $data['title'] = 'User Dashboard';
         $this->load->view('template/header', $data);
         $this->load->view('user/index');
