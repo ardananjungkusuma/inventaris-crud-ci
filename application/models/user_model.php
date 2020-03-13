@@ -10,6 +10,12 @@ class user_model extends CI_Model
         return $query->result_array();
     }
 
+    public function datatabels()
+    {
+        $query = $this->db->order_by('id_user', 'DESC')->get('user');
+        return $query->result();
+    }
+
     public function getUserById($id)
     {
         return $this->db->get_where('user', ['id_user' => $id])->row();

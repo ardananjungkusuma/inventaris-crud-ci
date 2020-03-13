@@ -14,6 +14,10 @@
             margin-left: 3px;
         }
     </style>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?= base_url() ?>assets/css/jquery.dataTables.min.css">
+    <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap.min.css" type="text/css">
 </head>
 
 <body>

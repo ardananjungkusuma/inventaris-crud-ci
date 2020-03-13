@@ -29,7 +29,7 @@
             <a href="<?= base_url(); ?>mahasiswa/tambah" class="btn btn-primary">Tambah Data Mahasiswa</a>
         </div>
     </div>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
@@ -40,7 +40,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="row mt-3">
 
         <div class="col-lg-12" style="margin: 0 auto;">
@@ -50,31 +50,33 @@
                     Data Mahasiswa
                 </div>
             <?php endif; ?>
-            <table class="table table-striped">
-                <tr style="background-color:darkcyan;color:white">
-                    <td>Nama Mahasiswa</td>
-                    <td>NIM</td>
-                    <td>Aksi</td>
-                </tr>
-                <?php
-                foreach ($mahasiswa as $mhs) : ?>
-                    <tr>
-                        <td>
-                            <?= $mhs['nama']; ?>
-                        </td>
-                        <td>
-                            <?= $mhs['nim']; ?>
-                        </td>
-                        <td>
-                            <a href=" <?php echo base_url(); ?>mahasiswa/hapusDataMahasiswa/<?php echo $mhs['id_mahasiswa']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
-                            <a href="<?= base_url(); ?>mahasiswa/edit/<?= $mhs['id_mahasiswa']; ?>" class="btn btn-success float-center">Edit</a>
-                            <a href="<?php echo base_url(); ?>mahasiswa/detail/<?php echo $mhs['id_mahasiswa']; ?>" class="btn btn-primary float-center">Detail</a>
-                        </td>
+            <table class="table table-striped table-bordered" id="listMahasiswa">
+                <thead>
+                    <tr style="background-color:darkcyan;color:white">
+                        <td>Nama Mahasiswa</td>
+                        <td>NIM</td>
+                        <td>Aksi</td>
                     </tr>
-                <?php endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($mahasiswa as $mhs) : ?>
+                        <tr>
+                            <td>
+                                <?= $mhs->nama; ?>
+                            </td>
+                            <td>
+                                <?= $mhs->nim; ?>
+                            </td>
+                            <td>
+                                <a href=" <?php echo base_url(); ?>mahasiswa/hapusDataMahasiswa/<?= $mhs->id_mahasiswa ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
+                                <a href="<?= base_url(); ?>mahasiswa/edit/<?= $mhs->id_mahasiswa ?>" class="btn btn-success float-center">Edit</a>
+                                <a href="<?php echo base_url(); ?>mahasiswa/detail/<?= $mhs->id_mahasiswa ?>" class="btn btn-primary float-center">Detail</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

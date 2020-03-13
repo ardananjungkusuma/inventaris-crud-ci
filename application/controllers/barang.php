@@ -28,8 +28,10 @@ class barang extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'List Barang';
-        $data['barang'] = $this->barang_model->getAllBarang();
+        $data = array(
+            'title' => 'List Barang',
+            'barang' =>  $this->barang_model->datatabels()
+        );
         if ($this->input->post('keyword')) {
             #code..
             $data['barang'] = $this->barang_model->cariDataBarang();

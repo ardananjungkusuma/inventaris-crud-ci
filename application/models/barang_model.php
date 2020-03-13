@@ -10,6 +10,12 @@ class barang_model extends CI_Model
         return $query->result_array();
     }
 
+    public function datatabels()
+    {
+        $query = $this->db->order_by('id_barang', 'DESC')->get('barang');
+        return $query->result();
+    }
+
     public function tambahDataBarang()
     {
         $data = [

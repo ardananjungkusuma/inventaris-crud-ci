@@ -24,7 +24,7 @@
         </div>
     <?php endif; ?>
     <br>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
@@ -35,7 +35,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="row mt-3">
 
         <div class="col-lg-12" style="margin: 0 auto;">
@@ -45,56 +45,57 @@
                     Data User Tidak Ditemukan
                 </div>
             <?php endif; ?>
-            <table class="table table-striped">
-                <tr style="background-color:darkcyan;color:white">
-                    <td>Nama</td>
-                    <td>Username</td>
-                    <td>Email</td>
-                    <td>Level</td>
-                    <td>Status</td>
-                    <td>Aksi</td>
-                </tr>
-                <?php
-                foreach ($user as $usr) : ?>
-                    <tr>
-                        <td>
-                            <?= $usr['nama']; ?>
-                        </td>
-                        <td>
-                            <?= $usr['username']; ?>
-                        </td>
-                        <td>
-                            <?= $usr['email']; ?>
-                        </td>
-                        <td>
-                            <?= $usr['level']; ?>
-                        </td>
-                        <td>
-                            <?= $usr['status'] ?>
-                        </td>
-                        <?php
-                        $usernameLoginNow = $this->session->userdata('user');
-                        if ($usr['username'] == $usernameLoginNow) { ?>
-                            <td>
-                                <a href="<?php echo base_url(); ?>user/detail/<?php echo $usr['id_user']; ?>" class="btn btn-primary float-center">Detail</a>
-                            </td>
-                        <?php
-                        } else { ?>
-                            <td>
-                                <a href=" <?php echo base_url(); ?>user/hapusDataUser/<?php echo $usr['id_user']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
-                                <a href="<?= base_url(); ?>user/edit/<?= $usr['id_user']; ?>" class="btn btn-success float-center">Edit</a>
-                                <a href="<?php echo base_url(); ?>user/detail/<?php echo $usr['id_user']; ?>" class="btn btn-primary float-center">Detail</a>
-                                <a href="<?php echo base_url(); ?>user/changePassword/<?php echo $usr['id_user']; ?>" class="btn btn-warning float-center">Change Pass</a>
-                            </td>
-                        <?php
-                        }
-                        ?>
-
+            <table class="table table-striped table-bordered" id="listUser">
+                <thead>
+                    <tr style="background-color:darkcyan;color:white">
+                        <td>Nama</td>
+                        <td>Username</td>
+                        <td>Email</td>
+                        <td>Level</td>
+                        <td>Status</td>
+                        <td>Aksi</td>
                     </tr>
-                <?php endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($user as $usr) : ?>
+                        <tr>
+                            <td>
+                                <?= $usr->nama ?>
+                            </td>
+                            <td>
+                                <?= $usr->username ?>
+                            </td>
+                            <td>
+                                <?= $usr->email ?>
+                            </td>
+                            <td>
+                                <?= $usr->level ?>
+                            </td>
+                            <td>
+                                <?= $usr->status ?>
+                            </td>
+                            <?php
+                            $usernameLoginNow = $this->session->userdata('user');
+                            if ($usr->username  == $usernameLoginNow) { ?>
+                                <td>
+                                    <a href="<?php echo base_url(); ?>user/detail/<?= $usr->id_user ?>" class="btn btn-primary float-center">Detail</a>
+                                </td>
+                            <?php
+                            } else { ?>
+                                <td>
+                                    <a href=" <?php echo base_url(); ?>user/hapusDataUser/<?= $usr->id_user ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
+                                    <a href="<?= base_url(); ?>user/edit/<?= $usr->id_user ?>" class="btn btn-success float-center">Edit</a>
+                                    <a href="<?php echo base_url(); ?>user/detail/<?= $usr->id_user ?>" class="btn btn-primary float-center">Detail</a>
+                                    <a href="<?php echo base_url(); ?>user/changePassword/<?= $usr->id_user ?>" class="btn btn-warning float-center">Change Pass</a>
+                                </td>
+                            <?php
+                            }
+                            ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

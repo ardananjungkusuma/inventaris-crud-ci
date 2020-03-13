@@ -29,7 +29,7 @@
             <a href="<?= base_url(); ?>barang/tambah" class="btn btn-primary">Tambah Data Barang</a>
         </div>
     </div>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
@@ -40,7 +40,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="row mt-3">
 
         <div class="col-lg-12" style="margin: 0 auto;">
@@ -50,46 +50,55 @@
                     Data Barang
                 </div>
             <?php endif; ?>
-            <table class="table table-striped">
-                <tr style="background-color:darksalmon;color:white">
-                    <td>Nama Barang</td>
-                    <td>Merk Barang</td>
-                    <td>Jumlah Barang</td>
-                    <td>Aksi</td>
-                </tr>
-                <?php
-                foreach ($barang as $brg) : ?>
-                    <tr>
-                        <td>
-                            <?= $brg['nama_barang']; ?>
-                        </td>
-                        <td>
-                            <?= $brg['merk']; ?>
-                        </td>
-                        <td>
-                            <?= $brg['jumlah_barang']; ?> Unit
-                        </td>
-                        <td>
-                            <?php
-                            $status_login = $this->session->userdata('level');
-                            if ($status_login == 'admin' || $status_login == 'kalab') {
-                            ?>
-                                <a href=" <?php echo base_url(); ?>barang/hapus/<?php echo $brg['id_barang']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
-                                <a href="<?= base_url(); ?>barang/edit/<?= $brg['id_barang']; ?>" class="btn btn-success float-center">Edit</a>
-                                <a href="<?php echo base_url(); ?>barang/detail/<?php echo $brg['id_barang']; ?>" class="btn btn-primary float-center">Detail</a>
-                            <?php
-                            } else {
-                            ?>
-                                <a href="<?php echo base_url(); ?>barang/detail/<?php echo $brg['id_barang']; ?>" class="btn btn-primary float-center">Detail</a>
-                            <?php
-                            }
-                            ?>
-                        </td>
+            <table id="listBarang" class="table table-striped table-bordered">
+                <thead>
+
+                    <tr style="background-color:darksalmon;color:white">
+                        <td>No</td>
+                        <td>Nama Barang</td>
+                        <td>Merk Barang</td>
+                        <td>Jumlah Barang</td>
+                        <td>Aksi</td>
                     </tr>
-                <?php endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($barang as $barang) {
+                    ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td>
+                                <?= $barang->nama_barang; ?>
+                            </td>
+                            <td>
+                                <?= $barang->merk ?>
+                            </td>
+                            <td>
+                                <?= $barang->jumlah_barang ?> Unit
+                            </td>
+                            <td>
+                                <?php
+                                $status_login = $this->session->userdata('level');
+                                if ($status_login == 'admin' || $status_login == 'kalab') {
+                                ?>
+                                    <a href=" <?php echo base_url(); ?>barang/hapus/<?= $barang->id_barang ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
+                                    <a href="<?= base_url(); ?>barang/edit/<?= $barang->id_barang ?>" class="btn btn-success float-center">Edit</a>
+                                    <a href="<?php echo base_url(); ?>barang/detail/<?= $barang->id_barang ?>" class="btn btn-primary float-center">Detail</a>
+                                <?php
+                                } else {
+                                ?>
+                                    <a href="<?php echo base_url(); ?>barang/detail/<?= $barang->id_barang ?>" class="btn btn-primary float-center">Detail</a>
+                                <?php
+                                }
+                                ?>
+                            </td>
+                        <?php
+                    }
+                        ?>
+                        </tr>
+                </tbody>
             </table>
-
-
         </div>
     </div>
 </div>

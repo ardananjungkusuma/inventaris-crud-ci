@@ -99,12 +99,13 @@ class user extends CI_Controller
             redirect('user', 'refresh');
         } elseif ($this->session->userdata('level') == "admin") {
             $data['title'] = 'Data Admin';
-            $data['user'] = $this->user_model->getAllUser();
+            $data['user'] = $this->user_model->datatabels();
             if ($this->input->post('keyword')) {
                 $data['user'] = $this->user_model->cariDataUser();
             }
             $this->load->view('admin/template/header', $data);
             $this->load->view('user/list', $data);
+            $this->load->view('template/footer');
         } else {
             redirect('auth', 'refresh');
         }
