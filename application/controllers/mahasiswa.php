@@ -30,68 +30,106 @@ class mahasiswa extends CI_Controller
             #code..
             $data['mahasiswa'] = $this->mahasiswa_model->cariDataMahasiswa();
         }
-        $this->load->view('admin/template/header', $data);
-        $this->load->view('mahasiswa/index', $data);
-        $this->load->view('template/footer');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'admin') {
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('mahasiswa/index', $data);
+            $this->load->view('template/footer');
+        } elseif ($status_login == 'kalab') {
+            $this->load->view('template/header', $data);
+            $this->load->view('mahasiswa/index', $data);
+            $this->load->view('template/footer');
+        } elseif ($status_login == 'user') {
+            redirect('user', 'refresh');
+        } else {
+            redirect('auth', 'refresh');
+        }
     }
 
     public function tambah()
     {
-        $data['title'] = 'Form Menambahkan Data Mahasiswa';
-        $this->load->library('form_validation');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
+            redirect('transaksi', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $data['title'] = 'Form Menambahkan Data Mahasiswa';
+            $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-        $this->form_validation->set_rules('nim', 'Nim', 'trim|required');
-        $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+            $this->form_validation->set_rules('nim', 'Nim', 'trim|required');
+            $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
-            $this->load->view('mahasiswa/tambah', $data);
-            $this->load->view('template/footer');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('template/header', $data);
+                $this->load->view('mahasiswa/tambah', $data);
+                $this->load->view('template/footer');
+            } else {
+                $this->mahasiswa_model->tambahDataMahasiswa();
+                $this->session->set_flashdata('flash-data', 'ditambahkan');
+                redirect('mahasiswa', 'refresh');
+            }
         } else {
-            $this->mahasiswa_model->tambahDataMahasiswa();
-            $this->session->set_flashdata('flash-data', 'ditambahkan');
-            redirect('mahasiswa', 'refresh');
+            redirect('auth', 'refresh');
         }
     }
 
     public function hapusDataMahasiswa($id)
     {
-
-        $this->mahasiswa_model->hapusDataMahasiswa($id);
-        $this->session->flashdata('flash-data-hapus', 'Dihapus');
-        redirect('mahasiswa', 'refresh');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
+            redirect('transaksi', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $this->mahasiswa_model->hapusDataMahasiswa($id);
+            $this->session->flashdata('flash-data-hapus', 'Dihapus');
+            redirect('mahasiswa', 'refresh');
+        } else {
+            redirect('auth', 'refresh');
+        }
     }
 
     public function detail($id)
     {
-        $data['title'] = 'Detail Mahasiswa';
-        $data['mahasiswa'] = $this->mahasiswa_model->getMahasiswaById($id);
-        $this->load->view('template/header', $data);
-        $this->load->view('mahasiswa/detail', $data);
-        $this->load->view('template/footer');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
+            redirect('transaksi', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $data['title'] = 'Detail Mahasiswa';
+            $data['mahasiswa'] = $this->mahasiswa_model->getMahasiswaById($id);
+            $this->load->view('template/header', $data);
+            $this->load->view('mahasiswa/detail', $data);
+            $this->load->view('template/footer');
+        } else {
+            redirect('auth', 'refresh');
+        }
     }
 
     public function edit($id)
     {
-        $data['title'] = 'Form Edit Mahasiswa';
-        $data['mahasiswa'] = $this->mahasiswa_model->getMahasiswaById($id);
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-        $this->form_validation->set_rules('nim', 'Nim', 'trim|required');
-        $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+        $status_login = $this->session->userdata('level');
+        if ($status_login == 'user') {
+            redirect('transaksi', 'refresh');
+        } elseif ($status_login == 'admin' || $status_login == 'kalab') {
+            $data['title'] = 'Form Edit Mahasiswa';
+            $data['mahasiswa'] = $this->mahasiswa_model->getMahasiswaById($id);
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+            $this->form_validation->set_rules('nim', 'Nim', 'trim|required');
+            $this->form_validation->set_rules('no_hp', 'No_hp', 'trim|required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header', $data);
-            $this->load->view('mahasiswa/edit', $data);
-            $this->load->view('template/footer');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('template/header', $data);
+                $this->load->view('mahasiswa/edit', $data);
+                $this->load->view('template/footer');
+            } else {
+                $this->mahasiswa_model->ubahDataMahasiswa();
+                $this->session->set_flashdata('flash-data', 'diedit');
+                redirect('mahasiswa', 'refresh');
+            }
         } else {
-            $this->mahasiswa_model->ubahDataMahasiswa();
-            $this->session->set_flashdata('flash-data', 'diedit');
-            redirect('mahasiswa', 'refresh');
+            redirect('auth', 'refresh');
         }
     }
 }

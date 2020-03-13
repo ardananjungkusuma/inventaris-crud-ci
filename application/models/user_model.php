@@ -29,6 +29,15 @@ class user_model extends CI_Model
         $this->db->update('user', $data);
     }
 
+    public function changePassword()
+    {
+        $password = [
+            "password" => htmlspecialchars(MD5($this->input->post('password', true)))
+        ];
+        $this->db->where('id_user', $this->input->post('id_user', true));
+        $this->db->update('user', $password);
+    }
+
     public function cariDataUser()
     {
         $keyword = $this->input->post('keyword');

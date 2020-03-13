@@ -14,7 +14,13 @@ class barang extends CI_Controller
             $data['title'] = 'Login User';
             $this->load->view('auth/template/header', $data);
             $this->load->view('auth/login', $data);
-        } elseif ($this->session->userdata('level') != "user" and $this->session->userdata('level') != "admin") {
+        } elseif ($this->session->userdata('level') == "kalab" and $this->session->userdata('status') == "Tidak Aktif") {
+            $this->session->sess_destroy();
+            $data['pesan'] = "Maaf Anda Belum Aktif, Tolong Hubungi Admin";
+            $data['title'] = 'Login User';
+            $this->load->view('auth/template/header', $data);
+            $this->load->view('auth/login', $data);
+        } elseif ($this->session->userdata('level') != "user" and $this->session->userdata('level') != "admin" and $this->session->userdata('level') != "kalab") {
             redirect('auth', 'refresh');
         }
     }

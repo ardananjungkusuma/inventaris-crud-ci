@@ -33,7 +33,6 @@ class user extends CI_Controller
 
     public function hapusDataUser($id)
     {
-
         $this->user_model->hapusDataUser($id);
         $this->session->flashdata('flash-data-hapus', 'Dihapus');
         redirect('user/listUser', 'refresh');
@@ -66,6 +65,29 @@ class user extends CI_Controller
             $this->load->view('user/edit', $data);
         } else {
             $this->user_model->ubahDataUser();
+            $this->session->set_flashdata('flash-data', 'diedit');
+            redirect('user/listUser', 'refresh');
+        }
+    }
+
+    public function changePassword($id)
+    {
+        $data['title'] = 'Change Password';
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
+        $data['level'] = ['admin', 'user', 'kalab'];
+        $data['user'] = $this->user_model->getUserById($id);
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passwordConf]', [
+            'matches' => 'Password Doesn"t Match',
+        ]);
+        $this->form_validation->set_rules('passwordConf', 'Confirmation Password', 'required|trim|min_length[6]|matches[password]');
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('user/change-password', $data);
+        } else {
+            $this->user_model->changePassword();
             $this->session->set_flashdata('flash-data', 'diedit');
             redirect('user/listUser', 'refresh');
         }

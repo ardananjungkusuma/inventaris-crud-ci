@@ -19,6 +19,11 @@
                         <input type="text" class="form-control" id="username" name="username">
                         <label>Email</label>
                         <input type="email" class="form-control" id="email" name="email">
+                        <label>Daftar Sebagai</label>
+                        <select class="form-control" name="level" id="level" required>
+                            <option value="user" selected>Pengguna</option>
+                            <option value="kalab">Petugas Lab</option>
+                        </select>
                         <label>Password</label>
                         <input type="password" class="form-control" id="password" name="password">
                         <label>Confirm Password</label>

@@ -73,7 +73,8 @@
                             <?= $usr['status'] ?>
                         </td>
                         <?php
-                        if ($usr['level'] == "admin") { ?>
+                        $usernameLoginNow = $this->session->userdata('user');
+                        if ($usr['username'] == $usernameLoginNow) { ?>
                             <td>
                                 <a href="<?php echo base_url(); ?>user/detail/<?php echo $usr['id_user']; ?>" class="btn btn-primary float-center">Detail</a>
                             </td>
@@ -83,6 +84,7 @@
                                 <a href=" <?php echo base_url(); ?>user/hapusDataUser/<?php echo $usr['id_user']; ?>" class="btn btn-danger float-center" onclick="return confirm('Apakah anda yakin menghapus data ini?')">Hapus</a>
                                 <a href="<?= base_url(); ?>user/edit/<?= $usr['id_user']; ?>" class="btn btn-success float-center">Edit</a>
                                 <a href="<?php echo base_url(); ?>user/detail/<?php echo $usr['id_user']; ?>" class="btn btn-primary float-center">Detail</a>
+                                <a href="<?php echo base_url(); ?>user/changePassword/<?php echo $usr['id_user']; ?>" class="btn btn-warning float-center">Change Pass</a>
                             </td>
                         <?php
                         }

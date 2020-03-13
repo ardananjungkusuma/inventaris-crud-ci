@@ -15,6 +15,8 @@ class auth extends CI_Controller
             redirect('user', 'refresh');
         } elseif ($this->session->userdata('level') == "admin") {
             redirect('admin', 'refresh');
+        } elseif ($this->session->userdata('level') == "kalab") {
+            redirect('kalab', 'refresh');
         }
         $data['title'] = 'Inventaris Lab JTI';
         $this->load->view('auth/template/header', $data);
@@ -68,6 +70,14 @@ class auth extends CI_Controller
                 $this->load->view('auth/login', $data);
             } elseif ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Aktif") {
                 redirect('user/index');
+            } elseif ($this->session->userdata('level') == "kalab" and $this->session->userdata('status') == "Tidak Aktif") {
+                $this->session->sess_destroy();
+                $data['pesan'] = "Maaf Anda Belum Aktif, Tolong Hubungi Admin";
+                $data['title'] = 'Login User';
+                $this->load->view('auth/template/header', $data);
+                $this->load->view('auth/login', $data);
+            } elseif ($this->session->userdata('level') == "kalab" and $this->session->userdata('status') == "Aktif") {
+                redirect('kalab/index');
             }
         } else {
             $data['pesan'] = "Maaf Username dan Password anda salah!";
@@ -82,6 +92,7 @@ class auth extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('level', 'Level', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passwordConf]', [
             'matches' => 'Password Doesn"t Match',
         ]);
