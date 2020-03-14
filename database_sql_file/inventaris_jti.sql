@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2020 at 03:57 AM
+-- Generation Time: Mar 14, 2020 at 03:09 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -40,13 +40,17 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `merk`, `jumlah_barang`) VALUES
-(1, 'Keyboard', 'Logitech', 22),
+(1, 'Keyboard', 'Logitech', 23),
 (3, 'Access Point', 'TP-Link', 48),
 (4, 'Printer', 'Canon 201', 50),
 (5, 'Mouse', 'Votre', 119),
 (6, 'Projector', 'BenQ', 51),
 (8, 'Keyboard', 'Votre', 120),
-(10, 'Mouse', 'Acer', 49);
+(10, 'Mouse', 'Acer', 48),
+(11, 'Kabel LAN 5 M', 'Belden', 20),
+(12, 'Obeng', 'None', 29),
+(13, 'Mikrotik', 'RB750', 29),
+(14, 'Headphone', 'Votre', 50);
 
 -- --------------------------------------------------------
 
@@ -100,11 +104,14 @@ INSERT INTO `transaksi_inventaris` (`id_transaksi`, `id_mahasiswa`, `id_barang`,
 (1, 1, 1, '2020-02-26', '2020-02-27', '2020-02-27', 'Sudah Dikembalikan'),
 (3, 3, 3, '2020-02-26', '2020-02-27', '2020-02-27', 'Sudah Dikembalikan'),
 (5, 7, 8, '2020-02-27', '2020-02-28', '2020-02-29', 'Dikembalikan Terlambat'),
-(6, 4, 1, '2020-02-27', '2020-02-28', 'None', 'Belum Dikembalikan'),
+(6, 4, 1, '2020-02-27', '2020-02-28', '2020-03-01', 'Dikembalikan Terlambat'),
 (7, 6, 6, '2020-02-27', '2020-02-28', 'None', 'Belum Dikembalikan'),
 (8, 1, 5, '2020-02-27', '2020-02-28', 'None', 'Belum Dikembalikan'),
 (9, 6, 4, '2020-03-02', '2020-03-03', '2020-03-03', 'Sudah Dikembalikan'),
-(10, 10, 10, '2020-03-04', '2020-03-05', 'None', 'Belum Dikembalikan');
+(10, 10, 10, '2020-03-04', '2020-03-05', 'None', 'Belum Dikembalikan'),
+(11, 10, 10, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan'),
+(12, 9, 13, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan'),
+(13, 1, 12, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan');
 
 -- --------------------------------------------------------
 
@@ -118,7 +125,7 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `email` varchar(90) NOT NULL,
   `password` varchar(90) NOT NULL,
-  `level` varchar(20) NOT NULL DEFAULT 'user',
+  `level` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -128,9 +135,15 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama`, `username`, `email`, `password`, `level`, `status`) VALUES
 (1, 'Administrator 1', 'admin', 'admin.ardan@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', 'Aktif'),
-(2, 'Sugeng Prastiyo', 'sugengprastiyo', 'sugengprastiyo@gmail.com', '6c62460ad1e6a9a106a8debb80e2f07e', 'user', 'Tidak Aktif'),
+(2, 'Sugeng Prastiyo', 'sugengprastiyo', 'sugengprastiyo@gmail.com', '6c62460ad1e6a9a106a8debb80e2f07e', 'admin', 'Aktif'),
 (3, 'Livia Yurike', 'livia', 'livia@gmail.com', '3fb4b2291f7bf8c4835b8a11f1cf199f', 'user', 'Aktif'),
-(4, 'Putranda Bagus C.L', 'putranda', 'putranda@gmail.com', 'ed3a428ffe6ab0eadfe5a196c0ada39b', 'user', 'Aktif');
+(4, 'Putranda Bagus C.L', 'putranda', 'putranda@gmail.com', 'c5d6f92171f09fdd81984453930ec018', 'user', 'Aktif'),
+(5, 'Dina Risky Alin Saputri', 'dinarisky', 'dinarisky04@gmail.com', 'f093c0fed979519fbc43d772b76f5c86', 'user', 'Aktif'),
+(6, 'Riza Zulfahnur', 'riza', 'rizazull@gmail.com', '41a44352a6f3cd3b45282acbce50927c', 'user', 'Aktif'),
+(7, 'Denny Nur Ramadhan', 'dennynur', 'dennynur@gmail.com', '7ad51e4d05511768c2224e7a80c0092f', 'user', 'Aktif'),
+(8, 'Ardan Anjung Kusuma', 'ardan', 'ardananjungkusuma@gmail.com', 'd2219d75098abd01493908d2f7f4d13d', 'user', 'Aktif'),
+(11, 'Agit Ari', 'agit', 'agitari@gmail.com', 'a505c964caa2a7a9f158378df55462f9', 'kalab', 'Aktif'),
+(12, 'Mashabi Arya', 'mashabi', 'mashabi12@gmail.com', '57937930d29d3913ac3929d4204657ee', 'kalab', 'Aktif');
 
 --
 -- Indexes for dumped tables
@@ -170,25 +183,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transaksi_inventaris`
 --
 ALTER TABLE `transaksi_inventaris`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
