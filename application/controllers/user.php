@@ -6,8 +6,7 @@ class user extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model('cetak_model');
         $this->load->model('user_model');
 
         if ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
@@ -109,5 +108,16 @@ class user extends CI_Controller
         } else {
             redirect('auth', 'refresh');
         }
+    }
+
+    public function cetakLaporan()
+    {
+        $data['title'] = 'Laporan User';
+        $data['user'] = $this->cetak_model->viewUser();
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan_user.pdf";
+        $this->pdf->load_view('user/laporan', $data);
     }
 }

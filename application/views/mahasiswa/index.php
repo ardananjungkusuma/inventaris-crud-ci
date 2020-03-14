@@ -27,6 +27,7 @@
     <div class="row mt-4">
         <div class="col-md-6">
             <a href="<?= base_url(); ?>mahasiswa/tambah" class="btn btn-primary">Tambah Data Mahasiswa</a>
+            <a href="<?= base_url(); ?>mahasiswa/cetak_laporan" class="btn btn-info">Cetak Data Mahasiswa</a>
         </div>
     </div>
     <!-- <div class="row mt-3">

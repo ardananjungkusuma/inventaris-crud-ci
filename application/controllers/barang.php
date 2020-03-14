@@ -7,6 +7,7 @@ class barang extends CI_Controller
     {
         parent::__construct();
         $this->load->model('barang_model');
+        $this->load->model('cetak_model');
 
         if ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
             $this->session->sess_destroy();
@@ -128,5 +129,16 @@ class barang extends CI_Controller
         } else {
             redirect('auth', 'refresh');
         }
+    }
+
+    public function cetakLaporan()
+    {
+        $data['title'] = 'Laporan Barang';
+        $data['barang'] = $this->cetak_model->viewBarang();
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan_barang.pdf";
+        $this->pdf->load_view('barang/laporan', $data);
     }
 }

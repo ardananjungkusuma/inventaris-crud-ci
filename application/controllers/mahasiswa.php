@@ -7,6 +7,7 @@ class mahasiswa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('mahasiswa_model');
+        $this->load->model('cetak_model');
 
         if ($this->session->userdata('level') == "kalab" and $this->session->userdata('status') == "Tidak Aktif") {
             $this->session->sess_destroy();
@@ -131,5 +132,16 @@ class mahasiswa extends CI_Controller
         } else {
             redirect('auth', 'refresh');
         }
+    }
+
+    public function cetak_laporan()
+    {
+        $data['title'] = 'Laporan Mahasiswa';
+        $data['mahasiswa'] = $this->cetak_model->viewMahasiswa();
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan_mahasiswa.pdf";
+        $this->pdf->load_view('mahasiswa/laporan', $data);
     }
 }

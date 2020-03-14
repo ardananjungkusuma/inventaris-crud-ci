@@ -26,7 +26,19 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <a href="<?= base_url(); ?>barang/tambah" class="btn btn-primary">Tambah Data Barang</a>
+            <?php
+            if ($this->session->userdata('level') == "user") {
+            ?>
+                <a href="<?= base_url(); ?>barang/cetakLaporan" class="btn btn-info">Cetak Data Barang</a>
+            <?php
+            } else {
+            ?>
+                <a href="<?= base_url(); ?>barang/tambah" class="btn btn-primary">Tambah Data Barang</a>
+                <a href="<?= base_url(); ?>barang/cetakLaporan" class="btn btn-info">Cetak Data Barang</a>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
     <!-- <div class="row mt-3">

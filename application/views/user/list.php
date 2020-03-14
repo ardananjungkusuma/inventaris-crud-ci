@@ -23,7 +23,11 @@
             </div>
         </div>
     <?php endif; ?>
-    <br>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <a href="<?= base_url(); ?>user/cetakLaporan" class="btn btn-info">Cetak Data User</a>
+        </div>
+    </div>
     <!-- <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">

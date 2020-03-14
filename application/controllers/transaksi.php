@@ -9,6 +9,7 @@ class transaksi extends CI_Controller
         $this->load->model('transaksi_model');
         $this->load->model('barang_model');
         $this->load->model('mahasiswa_model');
+        $this->load->model('cetak_model');
 
         if ($this->session->userdata('level') == "user" and $this->session->userdata('status') == "Tidak Aktif") {
             $this->session->sess_destroy();
@@ -132,6 +133,17 @@ class transaksi extends CI_Controller
     {
         header('Content-Type: application/json');
         echo $this->transaksi_model->json();
+    }
+
+    public function cetakLaporan()
+    {
+        $data['title'] = 'Laporan Transaksi';
+        $data['transaksi'] = $this->cetak_model->viewTransaksi();
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'landscape');
+        $this->pdf->filename = "laporan_transaksi.pdf";
+        $this->pdf->load_view('transaksi/laporan', $data);
     }
 }
 

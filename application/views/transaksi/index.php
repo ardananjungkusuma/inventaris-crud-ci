@@ -26,7 +26,18 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <a href="<?= base_url(); ?>transaksi/tambah" class="btn btn-primary">Tambah Peminjaman</a>
+            <?php
+            if ($this->session->userdata('level') == "user") {
+            ?>
+                <a href="<?= base_url(); ?>transaksi/cetakLaporan" class="btn btn-info">Cetak Data Transaksi</a>
+            <?php
+            } else {
+            ?>
+                <a href="<?= base_url(); ?>transaksi/tambah" class="btn btn-primary">Tambah Peminjaman</a>
+                <a href="<?= base_url(); ?>transaksi/cetakLaporan" class="btn btn-info">Cetak Data Transaksi</a>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <!-- <div class="row mt-3">
@@ -50,7 +61,6 @@
                     Data Transaksi tidak ditemukan
                 </div>
             <?php endif; ?>
-
             <table class="table table-striped table-bordered" id="listTransaksi">
                 <thead>
                     <tr style="background-color: cornflowerblue;color:white">
