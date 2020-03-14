@@ -31,7 +31,8 @@ class transaksi extends CI_Controller
     public function index()
     {
         $data['title'] = 'List Transaksi Inventaris JTI';
-        $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategori();
+        // $data['transaksi'] = $this->transaksi_model->getAllTransaksiUserKategori();
+        $data['transaksi'] = $this->transaksi_model->datatabels();
         if ($this->input->post('keyword')) {
             #code..
             $data['transaksi'] = $this->transaksi_model->cariDataTransaksi();
@@ -125,6 +126,12 @@ class transaksi extends CI_Controller
         } else {
             redirect('auth', 'refresh');
         }
+    }
+
+    function json()
+    {
+        header('Content-Type: application/json');
+        echo $this->transaksi_model->json();
     }
 }
 

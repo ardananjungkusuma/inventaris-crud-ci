@@ -29,7 +29,7 @@
             <a href="<?= base_url(); ?>transaksi/tambah" class="btn btn-primary">Tambah Peminjaman</a>
         </div>
     </div>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
         <div class="col-md-6">
             <form action="" method="post">
                 <div class="input-group">
@@ -40,7 +40,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="row mt-3">
         <div class="col-lg-12">
             <h2>Daftar Transaksi</h2>
@@ -51,53 +51,64 @@
                 </div>
             <?php endif; ?>
 
-            <table class="table table-striped" id="myTable">
-                <tr style="background-color: cornflowerblue;color:white">
-                    <td>Nama Peminjam</td>
-                    <td>Barang Yang Dipinjam</td>
-                    <td>Status Peminjaman</td>
-                    <td>Aksi</td>
-                </tr>
-                <?php
-                foreach ($transaksi as $trans) : ?>
-                    <tr>
-                        <td>
-                            <?= $trans['nama']; ?>
-                        </td>
-                        <td>
-                            <?= $trans['nama_barang']; ?> <?= $trans['merk'] ?>
-                        </td>
-                        <td>
-                            <?= $trans['status']; ?>
-                        </td>
-                        <?php
-                        if ($trans['status'] == "Sudah Dikembalikan" or $trans['status'] == "Dikembalikan Terlambat") {
-                        ?>
-                            <td>
-                                <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
-                            </td>
-                        <?php
-                        } else {
-                        ?>
-                            <td>
-                                <?php
-                                $status_login = $this->session->userdata('level');
-                                if ($status_login == 'user') {
-                                ?>
-                                    <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
-                                <?php
-                                } else {
-                                ?>
-                                    <a href="<?= base_url(); ?>transaksi/edit/<?= $trans['id_transaksi']; ?>" class="btn btn-success float-center">Edit</a>
-                                    <a href="<?php echo base_url(); ?>transaksi/detail/<?php echo $trans['id_transaksi']; ?>" class="btn btn-primary float-center">Detail</a>
-                                <?php
-                                }
-                                ?>
-                            </td>
+            <table class="table table-striped table-bordered" id="listTransaksi">
+                <thead>
+                    <tr style="background-color: cornflowerblue;color:white">
+                        <td>Tanggal Peminjaman</td>
+                        <td>Nama Peminjam</td>
+                        <td>Barang Yang Dipinjam</td>
+                        <td>Status Peminjaman</td>
+                        <td>Aksi</td>
                     </tr>
-            <?php
-                        }
-                    endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($transaksi as $trans) :
+                        $tanggalAwal = $trans->tanggal_pinjam;
+                        $newDate = date("d-m-Y", strtotime($tanggalAwal));
+                    ?>
+                        <tr>
+                            <td>
+                                <?= $newDate ?>
+                            </td>
+                            <td>
+                                <?= $trans->nama ?>
+                            </td>
+                            <td>
+                                <?= $trans->nama_barang ?> <?= $trans->merk ?>
+                            </td>
+                            <td>
+                                <?= $trans->status ?>
+                            </td>
+                            <?php
+                            if ($trans->status == "Sudah Dikembalikan" or $trans->status == "Dikembalikan Terlambat") {
+                            ?>
+                                <td>
+                                    <a href="<?php echo base_url(); ?>transaksi/detail/<?= $trans->id_transaksi ?>" class="btn btn-primary float-center">Detail</a>
+                                </td>
+                            <?php
+                            } else {
+                            ?>
+                                <td>
+                                    <?php
+                                    $status_login = $this->session->userdata('level');
+                                    if ($status_login == 'user') {
+                                    ?>
+                                        <a href="<?php echo base_url(); ?>transaksi/detail/<?= $trans->id_transaksi ?>" class="btn btn-primary float-center">Detail</a>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <a href="<?= base_url(); ?>transaksi/edit/<?= $trans->id_transaksi ?>" class="btn btn-success float-center">Edit</a>
+                                        <a href="<?php echo base_url(); ?>transaksi/detail/<?= $trans->id_transaksi ?>" class="btn btn-primary float-center">Detail</a>
+                                    <?php
+                                    }
+                                    ?>
+                                </td>
+                        </tr>
+                <?php
+                            }
+                        endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

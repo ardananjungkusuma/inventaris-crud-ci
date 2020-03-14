@@ -14,6 +14,21 @@ class transaksi_model extends CI_Model
         return $query->result_array();
     }
 
+    public function json()
+    {
+        $this->datatables->select('*');
+        $this->datatables->from('transaksi_inventaris t');
+        $this->datatables->join('mahasiswa m', 'm.id_mahasiswa = t.id_mahasiswa');
+        $this->datatables->join('barang b', 'b.id_barang = t.id_barang');
+        return $this->datatables->generate();
+    }
+
+    public function datatabels()
+    {
+        $query = $this->db->query("select * from transaksi_inventaris t join mahasiswa m on m.id_mahasiswa = t.id_mahasiswa join barang b on b.id_barang = t.id_barang order by t.id_transaksi DESC");
+        return $query->result();
+    }
+
     public function getAllTransaksiUserKategoriById($id)
     {
         $query = $this->db->query("select * from transaksi_inventaris t join mahasiswa m on m.id_mahasiswa = t.id_mahasiswa join barang b on b.id_barang = t.id_barang where t.id_transaksi = $id");
