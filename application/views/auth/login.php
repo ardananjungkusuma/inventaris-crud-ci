@@ -32,12 +32,19 @@
                         <input type="checkbox" onclick="passwordShowUnshow()">Show/Unshow Password
                     </div>
                     Dont have an account? <a href="<?= base_url(); ?>auth/register">Register Here</a>
+                    <br>
+                    <a onclick="myFunction()">Forgot Password</a>
                     <button type="submit" name="submit" class="btn btn-primary float-right">Login</button><br><br>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function myFunction() {
+        alert("Mohon Hubungi Administrator :)");
+    }
+</script>
 <?=
     form_close();
 ?>
