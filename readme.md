@@ -4,4 +4,4 @@ Nama Kelompok :<br>
 2. Sugeng Prastiyo<br>
 Kelas : TI-2B</h3>
 
-[Link Laporan](https://github.com/ardananjungkusuma/inventaris-crud-ci/tree/master/laporan)
+[Link Laporan Gitbook](https://ardananjungkusuma.gitbook.io/laporan-website-inventarisjti/)
