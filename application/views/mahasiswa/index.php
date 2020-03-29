@@ -30,18 +30,6 @@
             <a href="<?= base_url(); ?>mahasiswa/cetak_laporan" class="btn btn-info">Cetak Data Mahasiswa</a>
         </div>
     </div>
-    <!-- <div class="row mt-3">
-        <div class="col-md-6">
-            <form action="" method="post">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari Nama/NIM Mahasiswa" name="keyword">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Cari Data</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> -->
     <div class="row mt-3">
 
         <div class="col-lg-12" style="margin: 0 auto;">

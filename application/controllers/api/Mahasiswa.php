@@ -39,7 +39,7 @@ class Mahasiswa extends REST_Controller
     public function index_get()
     {
         // Users from a data store e.g. database
-        $id = $this->get('id');
+        $id = $this->get('id_mahasiswa');
 
         // If the id parameter doesn't exist return all the users
 
