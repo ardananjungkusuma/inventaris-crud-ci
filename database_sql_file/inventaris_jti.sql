@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2020 at 09:45 AM
+-- Generation Time: Apr 07, 2020 at 03:50 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -50,7 +50,9 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `merk`, `jumlah_barang`) VALUE
 (11, 'Kabel LAN 5 M', 'Belden', 20),
 (12, 'Obeng', 'None', 29),
 (13, 'Mikrotik', 'RB750', 29),
-(14, 'Headphone', 'Votre', 50);
+(14, 'Headphone', 'Votre', 50),
+(15, 'Mouse', 'Razer', 5),
+(17, 'Mouse', 'BenQ', 5);
 
 -- --------------------------------------------------------
 
@@ -71,14 +73,18 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama`, `nim`, `no_hp`, `alamat`) VALUES
-(1, 'Ardan Anjung Kusuma', '1841720041', '6285258967800', 'Jl. Sersan Kusman No 27 Bojonegoro\r\n'),
+(1, 'Ardan Anjung Kusuma', '1841720041', '6285258967800', 'Jl. Sersan Kusman No 27 Banjarejo'),
 (2, 'Sugeng Prastiyo', '1841720069', '6285213287256', 'Jl. Grogol 21 Blitar'),
 (3, 'Martin Amanu Khusna', '1841720081', '62823512378521', 'Jl. Trucukan 12 Magelang'),
-(4, 'Hunayn Risatayn', '1841720061', '628528123872', 'Sidoarjo\r\n'),
+(4, 'Hunayn Risatayn', '1841720061', '628528123872', 'Jl. Diponegoro 85 Sidoarjo'),
 (6, 'Agit Ari Irawan', '1841720110', '6285812383', 'Jl. Sukun 15 Malang'),
 (7, 'Osa Mahanani', '1841720061', '62857123857', 'Jl. Timor 12 Blitar'),
 (9, 'Silvi Indah Novita', '1841720012', '628512358969', 'Jl. Benowo 12 Malang'),
-(10, 'Irfan Rafif', '1841720069', '085123587123', 'Jl. Mawar 15 Malang');
+(10, 'Irfan Rafif', '1841720069', '6285123587123', 'Jl. Mawar 15 Malang'),
+(13, 'Mashabi Arya Kusuma', '1841720068', '085273781247', 'Jl. Veteran 58 Kediri'),
+(16, 'Alfan Noufal', '1841720068', '62812375862123', 'Jl. Kendali Hati 64 Sukun, Malang'),
+(20, 'Sultan Achmad Qum', '1841720091', '6285993277823', 'Jl. Kendari 24 Singosari, Malang'),
+(21, 'Abdurrasyid Muhasibi', '1841720101', '628512375283', 'Jl. Anggrek 96 Blitar');
 
 -- --------------------------------------------------------
 
@@ -111,7 +117,8 @@ INSERT INTO `transaksi_inventaris` (`id_transaksi`, `id_mahasiswa`, `id_barang`,
 (10, 10, 10, '2020-03-04', '2020-03-05', 'None', 'Belum Dikembalikan'),
 (11, 10, 10, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan'),
 (12, 9, 13, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan'),
-(13, 1, 12, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan');
+(13, 1, 12, '2020-03-14', '2020-03-15', 'None', 'Belum Dikembalikan'),
+(15, 13, 17, '2020-03-25', '2020-03-26', '2020-03-26', 'Sudah Dikembalikan');
 
 -- --------------------------------------------------------
 
@@ -183,19 +190,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `transaksi_inventaris`
 --
 ALTER TABLE `transaksi_inventaris`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
